@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "TriMet Stop Tracker",
+  "version": "1.0",
+
+  "description": "Realtime updates on TriMet arrival times.",
+
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+
+  "background": {
+    "scripts": [
+      "appid.js",
+      "background/main.js"
+    ]
+  },
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_title": "TriMet Stop Tracker"
+  }
+}
