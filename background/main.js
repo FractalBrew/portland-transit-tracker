@@ -8,10 +8,8 @@ let ports = [];
 async function getStops() {
   let results = await browser.storage.sync.get({ stops: [] });
   if (!("stops" in results)) {
-    console.log("Missing stops", []);
     return [];
   } else {
-    console.log("Got stops", results.stops);
     return results.stops;
   }
 }
@@ -96,21 +94,23 @@ function newListener(port) {
       case "addStop": {
         let stops = await getStops();
         stops.push(message.data);
-        console.log("Set stops to", stops);
         await setStops(stops);
 
-        clearTimeout(timer);
-        update();
+        if (timer) {
+          clearTimeout(timer);
+          update();
+        }
         break;
       }
       case "removeStop": {
         let stops = await getStops();
         stops = stops.filter(s => s != message.data);
-        console.log("Set stops to", stops);
         await setStops(stops);
 
-        clearTimeout(timer);
-        update();
+        if (timer) {
+          clearTimeout(timer);
+          update();
+        }
         break;
       }
       default: {
