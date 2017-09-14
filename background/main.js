@@ -26,6 +26,14 @@ async function update() {
   let stops = await getStops();
   if (stops.length == 0) {
     timer = setTimeout(update, UPDATE_TIMER);
+
+    for (let port of ports) {
+      port.postMessage({
+        message: "arrivals",
+        data: [],
+      });
+    }
+
     return;
   }
 

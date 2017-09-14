@@ -64,3 +64,13 @@ document.getElementById("addButton").addEventListener("click", () => {
     document.getElementById("stop").value = "";
   }
 });
+
+document.getElementById("stopList").addEventListener("click", (event) => {
+  if (event.target.className == "delete") {
+    let stop = event.target.parentNode.parentNode.dataset.locid;
+    port.postMessage({
+      message: "removeStop",
+      data: parseInt(stop),
+    });
+  }
+});
