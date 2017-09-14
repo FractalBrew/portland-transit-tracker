@@ -7,6 +7,7 @@ let timer = null;
 let ports = [];
 
 async function update() {
+  timer = null;
   let url = new URL(URL_ARRIVALS);
   url.searchParams.set("locIDs", STOPS.join(","));
   url.searchParams.set("appID", APP_ID);
@@ -59,6 +60,7 @@ function newListener(port) {
     ports = ports.filter(p => p != port);
     if (ports.length == 0) {
       clearTimeout(timer);
+      timer = null;
     }
   });
 
