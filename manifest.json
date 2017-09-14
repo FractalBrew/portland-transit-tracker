@@ -23,6 +23,7 @@
       "16": "icons/icon-16.png",
       "32": "icons/icon-32.png"
     },
-    "default_title": "TriMet Stop Tracker"
+    "default_title": "TriMet Stop Tracker",
+    "default_popup": "content/popup.html"
   }
 }

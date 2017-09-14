@@ -1,0 +1,11 @@
+#stopList tr{
+  height: 50px;
+}
+
+.loading {
+  background-color: gray;
+}
+
+.addRow {
+  text-align: right;
+}
