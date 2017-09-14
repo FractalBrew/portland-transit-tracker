@@ -1,15 +1,36 @@
 const URL_ARRIVALS = "https://developer.trimet.org/ws/V1/arrivals";
 
 const UPDATE_TIMER = 60000;
-const STOPS = [9299, 7500];
 
 let timer = null;
 let ports = [];
 
+async function getStops() {
+  let results = await browser.storage.sync.get({ stops: [] });
+  if (!("stops" in results)) {
+    console.log("Missing stops", []);
+    return [];
+  } else {
+    console.log("Got stops", results.stops);
+    return results.stops;
+  }
+}
+
+function setStops(stops) {
+  return browser.storage.sync.set({ stops });
+}
+
 async function update() {
   timer = null;
+
+  let stops = await getStops();
+  if (stops.length == 0) {
+    timer = setTimeout(update, UPDATE_TIMER);
+    return;
+  }
+
   let url = new URL(URL_ARRIVALS);
-  url.searchParams.set("locIDs", STOPS.join(","));
+  url.searchParams.set("locIDs", stops.join(","));
   url.searchParams.set("appID", APP_ID);
   url.searchParams.set("json", "true");
 
@@ -49,9 +70,7 @@ async function update() {
     console.error(response.statusText);
   }
 
-  if (ports.length) {
-    timer = setTimeout(update, UPDATE_TIMER);
-  }
+  timer = setTimeout(update, UPDATE_TIMER);
 }
 
 function newListener(port) {
@@ -61,6 +80,34 @@ function newListener(port) {
     if (ports.length == 0) {
       clearTimeout(timer);
       timer = null;
+    }
+  });
+
+  port.onMessage.addListener(async function(message) {
+    switch (message.message) {
+      case "addStop": {
+        let stops = await getStops();
+        stops.push(message.data);
+        console.log("Set stops to", stops);
+        await setStops(stops);
+
+        clearTimeout(timer);
+        update();
+        break;
+      }
+      case "removeStop": {
+        let stops = await getStops();
+        stops = stops.filter(s => s != message.data);
+        console.log("Set stops to", stops);
+        await setStops(stops);
+
+        clearTimeout(timer);
+        update();
+        break;
+      }
+      default: {
+        console.error("Unexpected message", message.message);
+      }
     }
   });
 

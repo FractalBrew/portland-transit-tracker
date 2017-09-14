@@ -14,6 +14,8 @@ port.onMessage.addListener((message) => {
     let stopData = message.data;
     for (let stop of stopData) {
       let row = document.createElement("tr");
+      row.dataset.locid = stop.id;
+
       let name = document.createElement("td");
       name.innerText = stop.name;
       name.className = "stopName";
@@ -48,5 +50,17 @@ port.onMessage.addListener((message) => {
 
       list.appendChild(row);
     }
+  }
+});
+
+document.getElementById("addButton").addEventListener("click", () => {
+  let stop = document.getElementById("stop").value;
+  if (stop && parseInt(stop).toString() == stop) {
+    port.postMessage({
+      message: "addStop",
+      data: parseInt(stop),
+    });
+
+    document.getElementById("stop").value = "";
   }
 });
