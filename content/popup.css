@@ -1,11 +1,44 @@
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 0px;
+}
+
 #stopList tr{
-  height: 50px;
+  height: 5em;
 }
 
 .loading {
   background-color: gray;
+  min-width: 35em;
 }
 
-.addRow {
+.stopName {
+  min-width: 20em;
+  padding: 10px;
+  color: white;
+  background: darkgray;
+}
+
+.arrival {
+  min-width: 5em;
+  padding: 10px;
+  color: black;
+  background: lightgray;
+}
+
+.delete {
+  color: red;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#addRow {
   text-align: right;
+  padding: 10px;
+  margin: 0;
 }

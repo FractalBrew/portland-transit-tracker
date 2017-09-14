@@ -30,6 +30,7 @@ port.onMessage.addListener((message) => {
       let row = document.createElement("tr");
       let name = document.createElement("td");
       name.innerText = stop.name;
+      name.className = "stopName";
       row.appendChild(name);
       for (let i = 0; i < 3; i++) {
         let arrival = document.createElement("td");
@@ -38,10 +39,21 @@ port.onMessage.addListener((message) => {
           let diff = time.getTime() - Date.now();
           diff /= 60000;
           arrival.innerText = `${parseInt(diff)}mins`;
-          arrival.className = stop.arrivals[i].expected ? "expected" : "scheduled";
+          arrival.className = stop.arrivals[i].expected ? "arrival expected" : "arrival scheduled";
         }
         row.appendChild(arrival);
       }
+
+      let button = document.createElement("button");
+      button.setAttribute("type", "button");
+      button.innerText = "X";
+      button.className = "delete";
+
+      let cell = document.createElement("td");
+      cell.appendChild(button);
+
+      row.appendChild(cell);
+
       list.appendChild(row);
     }
   }
