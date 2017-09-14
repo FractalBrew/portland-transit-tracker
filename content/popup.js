@@ -50,6 +50,7 @@ port.onMessage.addListener((message) => {
       button.className = "delete";
 
       let cell = document.createElement("td");
+      cell.className = "deleteCell";
       cell.appendChild(button);
 
       row.appendChild(cell);

@@ -1,5 +1,6 @@
 table {
   border-collapse: collapse;
+  width: 37em;
 }
 
 table td {
@@ -10,23 +11,22 @@ table td {
   height: 5em;
 }
 
-.loading {
-  background-color: gray;
-  min-width: 35em;
-}
-
 .stopName {
-  min-width: 20em;
+  width: 20em;
   padding: 10px;
   color: white;
   background: darkgray;
 }
 
 .arrival {
-  min-width: 5em;
+  width: 5em;
   padding: 10px;
   color: black;
   background: lightgray;
+}
+
+.deleteCell {
+  width: 2em;
 }
 
 .delete {
