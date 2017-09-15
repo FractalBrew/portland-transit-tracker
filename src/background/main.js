@@ -20,21 +20,10 @@ function setStops(stops) {
   return browser.storage.sync.set({ stops });
 }
 
-async function update() {
-  timer = null;
-
+async function retrieveStops() {
   let stops = await getStops();
   if (stops.length == 0) {
-    timer = setTimeout(update, UPDATE_TIMER);
-
-    for (let port of ports) {
-      port.postMessage({
-        message: "arrivals",
-        data: [],
-      });
-    }
-
-    return;
+    return [];
   }
 
   let url = new URL(URL_ARRIVALS);
@@ -68,22 +57,34 @@ async function update() {
       });
     }
 
-    for (let port of ports) {
-      port.postMessage({
-        message: "arrivals",
-        data: stopData,
-      });
-    }
+    return stopData;
   } else {
     console.error(response.statusText);
+    return [];
+  }
+}
+
+async function update() {
+  timer = null;
+
+  let stops = await retrieveStops();
+
+  console.log(`Sending to ${ports.length} listeners`)
+  for (let port of ports) {
+    port.postMessage({
+      message: "arrivals",
+      data: stops,
+    });
   }
 
   timer = setTimeout(update, UPDATE_TIMER);
 }
 
 function newListener(port) {
+  console.log("connect");
   ports.push(port);
   port.onDisconnect.addListener(() => {
+    console.log("disconnect");
     ports = ports.filter(p => p != port);
     if (ports.length == 0) {
       clearTimeout(timer);
@@ -121,9 +122,11 @@ function newListener(port) {
     }
   });
 
-  if (!timer) {
-    update();
+  if (timer) {
+    clearTimeout(timer);
   }
+
+  update();
 }
 
 browser.runtime.onConnect.addListener(newListener);
