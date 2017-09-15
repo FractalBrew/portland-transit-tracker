@@ -6,8 +6,8 @@ class StopList extends React.Component {
   render() {
     return (
       <table>
-        {this.props.stops.map((stop) =>
-          <Stop key={stop.id} stop={stop} port={this.props.port}/>
+        {this.props.stops.map((stop, i) =>
+          <Stop key={i} stop={stop} port={this.props.port}/>
         )}
       </table>
     );

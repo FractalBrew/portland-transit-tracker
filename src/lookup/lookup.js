@@ -132,11 +132,16 @@ class Lookup extends React.Component {
   }
 
   addStop(event) {
+    let direction = this.state.directions[this.state.selectedDirection];
     let stop = this.state.stops[this.state.selectedStop];
 
     port.postMessage({
       message: "addStop",
-      data: stop.id,
+      data: {
+        route: parseInt(this.state.selectedRoute),
+        direction: direction.id,
+        stop: stop.id,
+      }
     });
   }
 

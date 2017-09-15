@@ -26,7 +26,7 @@ async function retrieveStops() {
   }
 
   let url = new URL(URL_ARRIVALS);
-  url.searchParams.set("locIDs", stops.join(","));
+  url.searchParams.set("locIDs", Array.from(new Set(stops.map(s => s.stop))).join(","));
   url.searchParams.set("appID", APP_ID);
   url.searchParams.set("json", "true");
 
@@ -34,29 +34,33 @@ async function retrieveStops() {
   if (response.ok) {
     let json = await response.json();
 
-    let stops = {};
-    let stopData = [];
-    for (let location of json.resultSet.location) {
-      let stop = {
-        id: location.locid,
-        long: location.lng,
-        lat: location.lat,
-        name: location.desc,
-        arrivals: [],
-      };
-
-      stops[location.locid] = stop;
-      stopData.push(stop);
+    for (let stop of stops) {
+      for (let location of json.resultSet.location) {
+        if (stop.stop == location.locid) {
+          stop.long = location.lng;
+          stop.lat = location.lat;
+          stop.name = location.desc;
+          stop.arrivals = [];
+          break;
+        }
+      }
     }
 
     for (let arrival of json.resultSet.arrival) {
-      stops[arrival.locid].arrivals.push({
-        scheduled: new Date(arrival.scheduled),
-        estimated: new Date(arrival.estimated),
-      });
+      for (let stop of stops) {
+        if (stop.stop == arrival.locid &&
+            stop.direction == arrival.dir &&
+            stop.route == arrival.route) {
+          stop.arrivals.push({
+            scheduled: new Date(arrival.scheduled),
+            estimated: new Date(arrival.estimated),
+          });
+          break;
+        }
+      }
     }
 
-    return stopData;
+    return stops;
   } else {
     console.error(response.statusText);
     return [];
@@ -68,7 +72,6 @@ async function update() {
 
   let stops = await retrieveStops();
 
-  console.log(`Sending to ${ports.length} listeners`)
   for (let port of ports) {
     port.postMessage({
       message: "arrivals",
@@ -80,10 +83,8 @@ async function update() {
 }
 
 function newListener(port) {
-  console.log("connect");
   ports.push(port);
   port.onDisconnect.addListener(() => {
-    console.log("disconnect");
     ports = ports.filter(p => p != port);
     if (ports.length == 0) {
       clearTimeout(timer);
@@ -106,7 +107,14 @@ function newListener(port) {
       }
       case "removeStop": {
         let stops = await getStops();
-        stops = stops.filter(s => s != message.data);
+        stops = stops.filter(s => {
+          if (s.route == message.data.route &&
+              s.direction == message.data.direction &&
+              s.stop == message.data.stop) {
+            return false;
+          }
+          return true;
+        });
         await setStops(stops);
 
         if (timer) {

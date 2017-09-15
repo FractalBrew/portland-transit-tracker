@@ -12,7 +12,11 @@ class Stop extends React.Component {
   deleteStop() {
     this.props.port.postMessage({
       message: "removeStop",
-      data: parseInt(this.props.stop.id),
+      data: {
+        route: this.props.stop.route,
+        direction: this.props.stop.direction,
+        stop: this.props.stop.stop,
+      },
     });
   }
 
@@ -30,7 +34,7 @@ class Stop extends React.Component {
           <Arrival key={i} arrival={arrival}/>
         )}
         {blanks.map((blank, i) =>
-          <td></td>
+          <td key={i + arrivals.length}></td>
         )}
         <td className="deleteCell">
           <button type="button" className="delete" onClick={this.deleteStop}>X</button>
