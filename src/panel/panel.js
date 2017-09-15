@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import StopList from "../shared/list.jsx";
+import StopList from "./list.jsx";
 
 const port = browser.runtime.connect(null, { name: "panel" });;
 
