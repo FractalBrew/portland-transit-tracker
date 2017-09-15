@@ -1,3 +1,5 @@
+import { APP_ID } from "../shared/appid.js";
+
 const URL_ARRIVALS = "https://developer.trimet.org/ws/V1/arrivals";
 
 const UPDATE_TIMER = 60000;

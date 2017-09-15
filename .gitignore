@@ -1,1 +1,5 @@
-appid.js
+bin
+node_modules
+package-lock.json
+
+src/shared/appid.js

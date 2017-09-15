@@ -1,9 +1,5 @@
 {
   "manifest_version": 2,
-  "name": "TriMet Tracker",
-  "version": "1.0",
-
-  "description": "Realtime updates on TriMet arrival times at the stops you care about.",
 
   "icons": {
     "48": "icons/icon-48.png",
@@ -35,6 +31,6 @@
       "32": "icons/icon-32.png"
     },
     "default_title": "TriMet Tracker",
-    "default_popup": "content/popup.html"
+    "default_popup": "panel/panel.html"
   }
 }
