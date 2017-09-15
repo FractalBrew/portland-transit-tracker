@@ -19,7 +19,6 @@
 
   "background": {
     "scripts": [
-      "appid.js",
       "background/main.js"
     ]
   },

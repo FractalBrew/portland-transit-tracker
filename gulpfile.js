@@ -25,6 +25,12 @@ function webpack_js(dir, name) {
                .pipe(webpack({
                  output: {
                    filename: name,
+                 },
+                 module: {
+                   loaders: [
+                     { test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ },
+                     { test: /\.jsx$/, loader: "babel-loader", exclude: /node_modules/ }
+                   ]
                  }
                }))
                .pipe(gulp.dest(`bin/${dir}`));

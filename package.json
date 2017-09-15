@@ -5,13 +5,15 @@
   "scripts": {},
   "author": "Dave Townsend <brewmaster@fractalbrew.com> (https://www.fractalbrew.com)",
   "license": "MPL-2.0",
-  "dev-dependencies": {
-    "gulp": "^3.9.1"
-  },
   "dependencies": {
-    "gulp": "^3.9.1"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
     "gulp-json-editor": "^2.2.1",
     "webpack-stream": "^4.0.0"
   }
