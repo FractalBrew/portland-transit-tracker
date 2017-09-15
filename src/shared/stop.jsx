@@ -1,6 +1,5 @@
 import React from "react";
 
-import port from "./port.js";
 import Arrival from "./arrival.jsx";
 
 class Stop extends React.Component {
@@ -11,7 +10,7 @@ class Stop extends React.Component {
   }
 
   deleteStop() {
-    port.postMessage({
+    this.props.port.postMessage({
       message: "removeStop",
       data: parseInt(this.props.stop.id),
     });

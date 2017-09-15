@@ -39,5 +39,6 @@ function webpack_js(dir, name) {
 
 webpack_js("background", "main.js");
 webpack_js("panel", "panel.js");
+webpack_js("sidebar", "sidebar.js");
 
-gulp.task("build", ["build-manifest", "build-dist", "build-background", "build-panel"]);
+gulp.task("build", ["build-manifest", "build-dist", "build-background", "build-panel", "build-sidebar"]);

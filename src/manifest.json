@@ -31,5 +31,14 @@
     },
     "default_title": "TriMet Tracker",
     "default_popup": "panel/panel.html"
+  },
+
+  "sidebar_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_title": "TriMet Tracker",
+    "default_panel": "sidebar/sidebar.html"
   }
 }

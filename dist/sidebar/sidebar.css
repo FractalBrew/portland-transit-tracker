@@ -1,0 +1,45 @@
+table {
+  border-collapse: collapse;
+  width: 37em;
+}
+
+table td {
+  border: 0px;
+  width: 5em;
+}
+
+tr {
+  height: 5em;
+}
+
+.stopName {
+  width: 20em;
+  padding: 10px;
+  color: white;
+  background: darkgray;
+}
+
+.arrival {
+  padding: 10px;
+  color: black;
+  background: lightgray;
+  text-align: center;
+}
+
+.deleteCell {
+  width: 2em;
+}
+
+.delete {
+  color: red;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#addRow {
+  text-align: right;
+  padding: 10px;
+  margin: 0;
+}

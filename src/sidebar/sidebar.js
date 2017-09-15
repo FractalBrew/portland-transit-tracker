@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 
 import StopList from "../shared/list.jsx";
 
-const port = browser.runtime.connect(null, { name: "panel" });;
+const port = browser.runtime.connect(null, { name: "sidebar" });
 
-class Panel extends React.Component {
+class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,4 +49,4 @@ class Panel extends React.Component {
   }
 }
 
-ReactDOM.render(<Panel/>, document.getElementById("app"));
+ReactDOM.render(<Sidebar/>, document.getElementById("app"));
