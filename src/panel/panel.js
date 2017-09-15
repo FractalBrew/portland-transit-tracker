@@ -11,8 +11,6 @@ class Panel extends React.Component {
 
     this.state = { stops: [] };
 
-    this.addStop = this.addStop.bind(this);
-
     port.onMessage.addListener((message) => {
       if (message.message == "arrivals") {
         this.setState({
@@ -22,27 +20,12 @@ class Panel extends React.Component {
     });
   }
 
-  addStop() {
-    // XXX Should be using refs or something
-    let stop = document.getElementById("stop").value;
-    if (stop && parseInt(stop).toString() == stop) {
-      port.postMessage({
-        message: "addStop",
-        data: parseInt(stop),
-      });
-
-      document.getElementById("stop").value = "";
-    }
-  }
-
   render() {
     return (
       <div>
         <StopList stops={this.state.stops} port={port}/>
         <p id="addRow">
-          <a href="http://trimet.org/#/tracker/line/">Lookup</a>
-          <label><input type="text" id="stop" /></label>
-          <button id="addButton" type="button" onClick={this.addStop}>Add Stop</button>
+          <a target="_blank" href={browser.extension.getURL("lookup/lookup.html")}>Add</a>
         </p>
       </div>
     );
