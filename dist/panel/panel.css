@@ -12,11 +12,20 @@ tr {
   height: 5em;
 }
 
-.stopName {
+.name {
   width: 20em;
   padding: 10px;
   color: white;
   background: darkgray;
+}
+
+.routeName {
+  font-size: 120%;
+  margin: 2px;
+}
+
+.stopName {
+  margin: 2px;
 }
 
 .arrival {

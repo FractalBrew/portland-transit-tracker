@@ -30,7 +30,10 @@ class Stop extends React.Component {
     return (
       <tbody>
         <tr>
-          <td className="stopName" colSpan="3">{this.props.stop.name}</td>
+          <td className="name" colSpan="3">
+            <p className="routeName">{this.props.stop.routeName}</p>
+            <p className="stopName">{this.props.stop.stopName}</p>
+          </td>
           <td className="deleteCell" rowSpan="2">
             <button type="button" className="delete" onClick={this.deleteStop}>X</button>
           </td>

@@ -29,7 +29,10 @@ class Stop extends React.Component {
 
     return (
       <tr>
-        <td className="stopName">{this.props.stop.name}</td>
+        <td className="name">
+          <p className="routeName">{this.props.stop.routeName}</p>
+          <p className="stopName">{this.props.stop.stopName}</p>
+        </td>
         {arrivals.map((arrival, i) =>
           <Arrival key={i} arrival={arrival}/>
         )}

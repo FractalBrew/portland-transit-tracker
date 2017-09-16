@@ -29,6 +29,8 @@ async function retrieveStops() {
   url.searchParams.set("locIDs", Array.from(new Set(stops.map(s => s.stop))).join(","));
   url.searchParams.set("appID", APP_ID);
   url.searchParams.set("json", "true");
+  url.searchParams.set("minutes", 60);
+  url.searchParams.set("arrivals", 3);
 
   let response = await fetch(url.href);
   if (response.ok) {
@@ -36,10 +38,10 @@ async function retrieveStops() {
 
     for (let stop of stops) {
       for (let location of json.resultSet.location) {
-        if (stop.stop == location.locid) {
+        if (stop.stop == location.id) {
           stop.long = location.lng;
           stop.lat = location.lat;
-          stop.name = location.desc;
+          stop.stopName = location.desc;
           stop.arrivals = [];
           break;
         }
@@ -51,6 +53,7 @@ async function retrieveStops() {
         if (stop.stop == arrival.locid &&
             stop.direction == arrival.dir &&
             stop.route == arrival.route) {
+          stop.routeName = arrival.shortSign;
           stop.arrivals.push({
             scheduled: new Date(arrival.scheduled),
             estimated: new Date(arrival.estimated),
