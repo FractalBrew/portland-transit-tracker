@@ -1,7 +1,7 @@
 import { APP_ID } from "../shared/appid.js";
 import { URL_ARRIVALS } from "../shared/urls.js";
 
-const UPDATE_TIMER = 60000;
+const UPDATE_TIMER = 30000;
 
 let timer = null;
 let ports = [];
