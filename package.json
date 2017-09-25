@@ -1,5 +1,5 @@
 {
-  "name": "trimet-tracker",
+  "name": "Portland Transit Tracker",
   "version": "1.0.0",
   "description": "Realtime updates on TriMet arrival times at the stops you care about.",
   "scripts": {},
