@@ -1,5 +1,6 @@
 bin
 node_modules
 package-lock.json
+*.xpi
 
 src/shared/appid.js

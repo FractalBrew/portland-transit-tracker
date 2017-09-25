@@ -1,6 +1,7 @@
 const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const json = require("gulp-json-editor");
+const zip = require('gulp-zip');
 
 gulp.task("build-manifest", function() {
   const package = require("./package.json");
@@ -43,3 +44,11 @@ webpack_js("sidebar", "sidebar.js");
 webpack_js("lookup", "lookup.js");
 
 gulp.task("build", ["build-manifest", "build-dist", "build-background", "build-panel", "build-sidebar", "build-lookup"]);
+
+gulp.task("package", ["build"], function() {
+  const package = require("./package.json");
+
+  gulp.src('bin/**/*')
+      .pipe(zip(`${package.name}.xpi`))
+      .pipe(gulp.dest("."));
+});
