@@ -1,16 +1,18 @@
+/* eslint-env node */
+
 const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const json = require("gulp-json-editor");
-const zip = require('gulp-zip');
+const zip = require("gulp-zip");
 
 gulp.task("build-manifest", function() {
-  const package = require("./package.json");
+  const manifest = require("./package.json");
 
   return gulp.src("src/manifest.json")
              .pipe(json({
-               name: package.name,
-               version: package.version,
-               description: package.description,
+               name: manifest.fullName,
+               version: manifest.version,
+               description: manifest.description,
              }))
              .pipe(gulp.dest("bin"));
 });
@@ -46,9 +48,9 @@ webpack_js("lookup", "lookup.js");
 gulp.task("build", ["build-manifest", "build-dist", "build-background", "build-panel", "build-sidebar", "build-lookup"]);
 
 gulp.task("package", ["build"], function() {
-  const package = require("./package.json");
+  const manifest = require("./package.json");
 
-  gulp.src('bin/**/*')
-      .pipe(zip(`${package.name}.xpi`))
+  gulp.src("bin/**/*")
+      .pipe(zip(`${manifest.fullName}.xpi`))
       .pipe(gulp.dest("."));
 });

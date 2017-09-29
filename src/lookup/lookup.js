@@ -131,7 +131,7 @@ class Lookup extends React.Component {
     this.setState({ selectedStop: event.target.value });
   }
 
-  addStop(event) {
+  addStop() {
     let direction = this.state.directions[this.state.selectedDirection];
     let stop = this.state.stops[this.state.selectedStop];
 

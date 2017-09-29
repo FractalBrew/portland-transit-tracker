@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import StopList from "./list.jsx";
 
-const port = browser.runtime.connect(null, { name: "panel" });;
+const port = browser.runtime.connect(null, { name: "panel" });
 
 class Panel extends React.Component {
   constructor(props) {
