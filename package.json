@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp build",
     "package": "gulp package",
-    "test": "mocha --require babel-register --compilers jsx:babel-register",
+    "test": "mocha",
     "lint": "eslint --ext .js,.jsx ."
   },
   "author": "Dave Townsend <brewmaster@fractalbrew.com> (https://www.fractalbrew.com)",

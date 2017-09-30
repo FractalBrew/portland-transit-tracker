@@ -1,12 +1,8 @@
 import React from "react";
 import { expect } from "chai";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "./utils";
 
 import Time from "../src/shared/time.jsx";
-
-Enzyme.configure({ adapter: new Adapter() });
-const { shallow } = Enzyme;
 
 describe("Time component", function() {
   it("Should display an estimated time", function() {
