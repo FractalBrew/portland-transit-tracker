@@ -141,7 +141,7 @@ class Lookup extends React.Component {
         route: parseInt(this.state.selectedRoute),
         direction: direction.id,
         stop: stop.id,
-      }
+      },
     });
   }
 

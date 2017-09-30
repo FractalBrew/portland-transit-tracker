@@ -11,7 +11,7 @@ describe("Panel Stop component", function() {
       stopName: "stop",
       arrivals: [{
         estimated: 5,
-        scheduled: 6
+        scheduled: 6,
       }],
     };
 

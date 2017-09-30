@@ -25,6 +25,7 @@ module.exports = {
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "no-console": ["error", { allow: ["warn", "error"] }],
+    "comma-dangle": ["error", "always-multiline"],
 
     "react/prop-types": "off"
   }
