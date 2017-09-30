@@ -27,6 +27,8 @@ module.exports = {
     "no-console": ["error", { allow: ["warn", "error"] }],
     "comma-dangle": ["error", "always-multiline"],
 
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/prefer-es6-class": "error",
+    "react/prefer-stateless-function": "error"
   }
 };
