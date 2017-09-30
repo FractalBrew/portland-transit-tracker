@@ -39,9 +39,10 @@ tr {
 }
 
 .estimated {
-  background: url("../shared/estimated.png");
+  background: url("../shared/estimated.svg");
   background-position: top right;
   background-repeat: no-repeat;
+  background-size: 18px 18px;
 }
 
 .deleteCell {
