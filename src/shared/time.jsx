@@ -5,8 +5,9 @@ class Time extends React.Component {
     let estimated = !!this.props.estimated;
     let time = estimated ? this.props.estimated : this.props.scheduled;
     let mins = Math.floor((time - Date.now()) / 60000);
+    let className = estimated ? "estimated" : "scheduled";
 
-    return (<span>{ mins }mins</span>);
+    return (<span className={ className }>{ mins }mins</span>);
   }
 }
 

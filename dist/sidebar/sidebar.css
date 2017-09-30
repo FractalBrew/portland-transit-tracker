@@ -27,10 +27,19 @@ tr {
 }
 
 .arrival {
-  padding: 10px;
   color: black;
   background: lightgray;
   text-align: center;
+}
+
+.arrival span {
+  padding: 18px 18px 5px 5px;
+}
+
+.estimated {
+  background: url("../shared/estimated.png");
+  background-position: top right;
+  background-repeat: no-repeat;
 }
 
 .deleteCell {
