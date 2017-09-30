@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "Realtime updates on TriMet arrival times at the stops you care about.",
   "scripts": {
-    "test": "mocha"
+    "build": "gulp build",
+    "package": "gulp package",
+    "test": "mocha",
+    "lint": "eslint --ext .js,.jsx ."
   },
   "author": "Dave Townsend <brewmaster@fractalbrew.com> (https://www.fractalbrew.com)",
   "license": "MPL-2.0",
