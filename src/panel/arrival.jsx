@@ -1,15 +1,13 @@
 import React from "react";
 
-class Arrival extends React.Component {
-  render() {
-    let estimated = !!this.props.arrival.estimated;
-    let time = estimated ? this.props.arrival.estimated : this.props.arrival.scheduled;
-    let mins = Math.floor((time - Date.now()) / 60000);
+import Time from "../shared/time.jsx";
 
-    return (
-      <td className="arrival"><span>{mins}mins</span></td>
-    );
-  }
+function Arrival(props) {
+  return (
+    <td className="arrival">
+      <Time estimated={ props.arrival.estimated } scheduled={ props.arrival.scheduled } />
+    </td>
+  );
 }
 
 export default Arrival;
