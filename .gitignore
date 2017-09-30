@@ -3,6 +3,6 @@ node_modules
 package-lock.json
 *.xpi
 
-.vscode/settings.json
+.vscode
 
 src/shared/appid.js
