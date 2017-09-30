@@ -41,7 +41,7 @@ function webpack_js(dir, name) {
 }
 
 webpack_js("background", "main.js");
-webpack_js("panel", "panel.js");
+webpack_js("panel", "index.js");
 webpack_js("sidebar", "sidebar.js");
 webpack_js("lookup", "lookup.js");
 
