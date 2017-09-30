@@ -25,7 +25,24 @@
 
   "browser_action": {
     "browser_style": true,
-    "default_icon": "icons/icon.svg",
+    "default_icon": {
+      "16": "icons/icon.svg",
+      "19": "icons/icon.svg",
+      "32": "icons/icon.svg"
+    },
+    "theme_icons": [{
+      "light": "icons/icon-white.svg",
+      "dark": "icons/icon.svg",
+      "size": 16
+    }, {
+      "light": "icons/icon-white.svg",
+      "dark": "icons/icon.svg",
+      "size": 19
+    }, {
+      "light": "icons/icon-white.svg",
+      "dark": "icons/icon.svg",
+      "size": 32
+    }],
     "default_title": "Portland Transit Tracker",
     "default_popup": "panel/panel.html"
   },
