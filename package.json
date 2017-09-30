@@ -12,7 +12,6 @@
   "author": "Dave Townsend <brewmaster@fractalbrew.com> (https://www.fractalbrew.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "chai": "^4.1.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
@@ -22,6 +21,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.8.0",
