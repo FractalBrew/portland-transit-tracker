@@ -26,7 +26,12 @@ module.exports = {
     "semi": ["error", "always"],
     "no-console": ["error", { allow: ["warn", "error"] }],
     "comma-dangle": ["error", "always-multiline"],
-
+    "curly": ["error", "all"],
+    "consistent-return": "error",
+    "no-labels": "error",
+    "array-bracket-spacing": ["error", "never"],
+    "brace-style": "error",
+    
     "react/prop-types": "off",
     "react/prefer-es6-class": "error",
     "react/prefer-stateless-function": "error"
