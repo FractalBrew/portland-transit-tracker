@@ -1,84 +1,21 @@
-import { APP_ID } from "../shared/appid.js";
-import { URL_ARRIVALS } from "../shared/urls.js";
+import { getStops, setStops } from "./storage";
+import { fetchArrivals } from "../shared/api";
 
 const UPDATE_TIMER = 30000;
 
 let timer = null;
 let ports = [];
 
-async function getStops() {
-  let results = await browser.storage.sync.get({ stops: [] });
-  if (!("stops" in results)) {
-    return [];
-  } else {
-    return results.stops;
-  }
-}
-
-function setStops(stops) {
-  return browser.storage.sync.set({ stops });
-}
-
-async function retrieveStops() {
-  let stops = await getStops();
-  if (stops.length == 0) {
-    return [];
-  }
-
-  let url = new URL(URL_ARRIVALS);
-  url.searchParams.set("locIDs", Array.from(new Set(stops.map(s => s.stop))).join(","));
-  url.searchParams.set("appID", APP_ID);
-  url.searchParams.set("json", "true");
-  url.searchParams.set("minutes", 60);
-  url.searchParams.set("arrivals", 3);
-
-  let response = await fetch(url.href);
-  if (response.ok) {
-    let json = await response.json();
-
-    for (let stop of stops) {
-      for (let location of json.resultSet.location) {
-        if (stop.stop == location.id) {
-          stop.long = location.lng;
-          stop.lat = location.lat;
-          stop.stopName = location.desc;
-          stop.arrivals = [];
-          break;
-        }
-      }
-    }
-
-    for (let arrival of json.resultSet.arrival) {
-      for (let stop of stops) {
-        if (stop.stop == arrival.locid &&
-            stop.direction == arrival.dir &&
-            stop.route == arrival.route) {
-          stop.routeName = arrival.shortSign;
-          stop.arrivals.push({
-            scheduled: new Date(arrival.scheduled),
-            estimated: new Date(arrival.estimated),
-          });
-          break;
-        }
-      }
-    }
-
-    return stops;
-  } else {
-    console.error(response.statusText);
-    return [];
-  }
-}
-
 async function update() {
   timer = null;
 
-  let stops = await retrieveStops();
+  let stops = await getStops();
+  let data = await fetchArrivals(stops);
 
   for (let port of ports) {
     port.postMessage({
       message: "arrivals",
-      data: stops,
+      data,
     });
   }
 

@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { APP_ID } from "../shared/appid.js";
-import { URL_ROUTES } from "../shared/urls.js";
+import { fetchRoutes, fetchStops } from "../shared/api";
 
 const port = browser.runtime.connect(null, { name: "lookup" });
 
@@ -32,79 +31,40 @@ class Lookup extends React.Component {
   }
 
   async retrieveRoutes() {
-    let url = new URL(URL_ROUTES);
-    url.searchParams.set("appID", APP_ID);
-    url.searchParams.set("json", "true");
+    let routes = await fetchRoutes();
 
-    let response = await fetch(url.href);
-    if (response.ok) {
-      let json = await response.json();
-      let routes = json.resultSet.route.map(r => ({
-        id: r.route,
-        name: r.desc,
-      }));
-      routes.sort((a, b) => {
-        if (isNumber(a.name)) {
-          if (isNumber(b.name)) {
-            return parseInt(a) - parseInt(b);
-          }
-          return 1;
-        } else if (isNumber(b.name)) {
-          return -1;
+    routes.sort((a, b) => {
+      if (isNumber(a.name)) {
+        if (isNumber(b.name)) {
+          return parseInt(a) - parseInt(b);
         }
+        return 1;
+      } else if (isNumber(b.name)) {
+        return -1;
+      }
 
-        return a.name.localeCompare(b.name);
-      });
+      return a.name.localeCompare(b.name);
+    });
 
-      this.setState({
-        routes,
-        selectedRoute: routes[0].id,
-      });
+    this.setState({
+      routes,
+      selectedRoute: routes[0].id,
+    });
 
-      this.retrieveStops(routes[0].id);
-    } else {
-      console.error(response.statusText);
-    }
+    this.retrieveStops(routes[0].id);
   }
 
   async retrieveStops(route) {
-    let url = new URL(URL_ROUTES);
-    url.searchParams.set("appID", APP_ID);
-    url.searchParams.set("json", "true");
-    url.searchParams.set("route", route);
-    url.searchParams.set("dir", "true");
-    url.searchParams.set("stops", "true");
+    let directions = await fetchStops(route);
 
-    let response = await fetch(url.href);
-    if (response.ok) {
-      let json = await response.json();
-      let route = json.resultSet.route[0];
-      let directions = [];
+    directions.sort((a, b) => a.name.localeCompare(b.name));
 
-      for (let dir of route.dir) {
-        directions.push({
-          id: dir.dir,
-          name: dir.desc,
-          stops: dir.stop.map(stop => ({
-            id: stop.locid,
-            long: stop.lng,
-            lat: stop.lat,
-            name: stop.desc,
-          })),
-        });
-      }
-
-      directions.sort((a, b) => a.name.localeCompare(b.name));
-
-      this.setState({
-        directions,
-        selectedDirection: 0,
-        stops: directions[0].stops,
-        selectedStop: 0,
-      });
-    } else {
-      console.error(response.statusText);
-    }
+    this.setState({
+      directions,
+      selectedDirection: 0,
+      stops: directions[0].stops,
+      selectedStop: 0,
+    });
   }
 
   changeRoute(event) {
