@@ -29,6 +29,9 @@ function webpack_js(dir, name) {
                  output: {
                    filename: name,
                  },
+                 externals: {
+                   url: "{ URL }",
+                 },
                  module: {
                    loaders: [
                      { test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ },

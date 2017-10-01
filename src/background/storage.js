@@ -1,3 +1,5 @@
+/* global browser */
+
 export async function getStops() {
   let results = await browser.storage.sync.get({ stops: [] });
   if (!("stops" in results)) {

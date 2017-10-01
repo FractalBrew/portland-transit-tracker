@@ -1,5 +1,6 @@
 import { APP_ID } from "./appid";
-import { URL_ARRIVALS, URL_ROUTES } from "../shared/urls.js";
+import { URL_ARRIVALS, URL_ROUTES } from "./urls";
+import { URL } from "url";
 
 export async function fetchArrivals(stops) {
   if (stops.length == 0) {
