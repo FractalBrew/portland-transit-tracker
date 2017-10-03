@@ -1,4 +1,4 @@
-import { APP_ID } from "./appid";
+import APP_ID from "./appid";
 import { URL_ARRIVALS, URL_ROUTES } from "./urls";
 import { URL } from "url";
 

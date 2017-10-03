@@ -5,4 +5,4 @@ package-lock.json
 
 .vscode
 
-src/shared/appid.js
+appid.sh

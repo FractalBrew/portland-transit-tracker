@@ -23,6 +23,10 @@ gulp.task("build-dist", function() {
 });
 
 function webpack_js(dir, name) {
+  if (!process.env.APPID) {
+    throw new Error("Refusing to build without a valid APP ID.");
+  }
+
   gulp.task(`build-${dir}`, function() {
     return gulp.src(`src/${dir}/${name}`)
                .pipe(webpack({
@@ -31,6 +35,7 @@ function webpack_js(dir, name) {
                  },
                  externals: {
                    url: "{ URL }",
+                   "./appid": `"${process.env.APPID}"`,
                  },
                  module: {
                    loaders: [
