@@ -26,7 +26,7 @@
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.8.0",
     "eslint-plugin-react": "^7.4.0",
-    "fetch-mock": "^5.12.2",
+    "fetch-mock": "^6.0.0",
     "gulp": "^3.9.1",
     "gulp-json-editor": "^2.2.1",
     "gulp-zip": "^4.0.0",
