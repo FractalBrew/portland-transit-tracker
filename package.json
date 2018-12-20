@@ -12,7 +12,7 @@
   "author": "Dave Townsend <brewmaster@fractalbrew.com> (https://www.fractalbrew.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "react": "^16.0.0",
+    "react": "^16.7.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
